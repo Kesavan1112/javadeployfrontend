@@ -7,8 +7,10 @@ function App() {
   const [students, setStudents] = useState([]);
   const [editStudent, setEditStudent] = useState(null);
 
+  const API_BASE = "https://javadeploymentsample-4.onrender.com";
+
   const loadStudents = async () => {
-    const res = await axios.get("http://localhost:8080/students");
+    const res = await axios.get(`${API_BASE}/students`);
     setStudents(res.data);
   };
 
@@ -17,18 +19,18 @@ function App() {
   }, []);
 
   const addStudent = async (student) => {
-    await axios.post("http://localhost:8080/students", student);
+    await axios.post(`${API_BASE}/students`, student);
     loadStudents();
   };
 
   const updateStudent = async (student) => {
-    await axios.put(`http://localhost:8080/students/${student.id}`, student);
+    await axios.put(`${API_BASE}/students/${student.id}`, student);
     setEditStudent(null);
     loadStudents();
   };
 
   const deleteStudent = async (id) => {
-    await axios.delete(`http://localhost:8080/students/${id}`);
+    await axios.delete(`${API_BASE}/students/${id}`);
     loadStudents();
   };
 
@@ -50,29 +52,3 @@ function App() {
 }
 
 export default App;
-/*import logo from './logo.svg';
-import './App.css';
-
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
-
-export default App;
-*/
